@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Vista de formulario para Materia -->
+        <record id="view_materia_form" model="ir.ui.view">
+            <field name="name">materia.form</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <form string="Materia">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Nombre de la Materia"/>
+                            <field name="codigo" placeholder="Código"/>
+                        </group>
+                        <group>
+                            <field name="descripcion" placeholder="Descripción"/>
+                        </group>
+                        <notebook>
+                            <page string="Cursos Asociados">
+                                <field name="curso_materia_ids">
+                                    <tree string="Cursos">
+                                        <field name="curso_id" string="Curso"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Materia -->
+        <record id="view_materia_tree" model="ir.ui.view">
+            <field name="name">materia.tree</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <tree string="Materias">
+                    <field name="name"/>
+                    <field name="codigo"/>
+                    <field name="descripcion" string="Descripción"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para abrir Materias -->
+        <record id="action_materia" model="ir.actions.act_window">
+            <field name="name">Materias</field>
+            <field name="res_model">agenda.materia</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menú para gestionar Materias -->
+        <menuitem id="menu_materia_root" name="Agenda Escolar" sequence="1"/>
+        <menuitem id="menu_materia" name="Materias" parent="menu_materia_root" action="action_materia" sequence="2"/>
+    </data>
+</odoo>

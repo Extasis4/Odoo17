@@ -1,0 +1,5 @@
+# Excluir volúmenes de datos y configuraciones locales
+odoo-db/
+odoo-data/
+custom_addons/__pycache__/
+*.log

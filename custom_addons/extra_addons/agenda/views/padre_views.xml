@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Vista de formulario para Padre -->
+        <record id="view_padre_form" model="ir.ui.view">
+            <field name="name">padre.form</field>
+            <field name="model">agenda.padre</field>
+            <field name="arch" type="xml">
+                <form string="Padre de Familia">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Nombre del Padre"/>
+                            <field name="vat" string="Carnet de Identidad"/>
+                            <field name="oficio" placeholder="Oficio"/>
+                            <field name="phone" string="Celular"/>
+                            <field name="email" string="Correo electrónico"/>
+                        </group>
+                        <notebook>
+                            <page string="Hijos">
+                                <field name="hijos_ids">
+                                    <tree>
+                                        <field name="name" string="Nombre del Alumno"/>
+                                        <field name="curso_id" string="Curso"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Padre -->
+        <record id="view_padre_tree" model="ir.ui.view">
+            <field name="name">padre.tree</field>
+            <field name="model">agenda.padre</field>
+            <field name="arch" type="xml">
+                <tree string="Padres de Familia">
+                    <field name="name" string="Nombre del Padre"/>
+                    <field name="vat" string="Carnet de Identidad"/>
+                    <field name="oficio" string="Oficio"/>
+                    <field name="phone" string="Celular"/>
+                    <field name="email" string="Correo electrónico"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la lista de Padres -->
+        <record id="action_padre" model="ir.actions.act_window">
+            <field name="name">Padres de Familia</field>
+            <field name="res_model">agenda.padre</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menú para Padres como submenú de Estudiantes -->
+        <menuitem id="menu_padre" name="Padres de Familia" action="action_padre" sequence="2"/>
+    </data>
+</odoo>

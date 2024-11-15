@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Menú principal de Agenda Escolar -->
+        <menuitem id="menu_agenda_escolar_root" name="Agenda Escolar" sequence="1"/>
+
+        <!-- Menú y vistas para Materia -->
+        <record id="view_materia_form" model="ir.ui.view">
+            <field name="name">materia.form</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <form string="Materia">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Nombre de la Materia"/>
+                            <field name="codigo" placeholder="Código"/>
+                        </group>
+                        <group>
+                            <field name="descripcion" placeholder="Descripción"/>
+                        </group>
+                        <notebook>
+                            <page string="Cursos Asociados">
+                                <field name="curso_materia_ids">
+                                    <tree string="Cursos">
+                                        <field name="curso_id" string="Curso"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_materia_tree" model="ir.ui.view">
+            <field name="name">materia.tree</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <tree string="Materias">
+                    <field name="name"/>
+                    <field name="codigo"/>
+                    <field name="descripcion" string="Descripción"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_materia" model="ir.actions.act_window">
+            <field name="name">Materias</field>
+            <field name="res_model">agenda.materia</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_materia" name="Materias" parent="menu_agenda_escolar_root" action="action_materia" sequence="2"/>
+
+        <!-- Menú y vistas para Curso -->
+        <record id="view_curso_form" model="ir.ui.view">
+            <field name="name">curso.form</field>
+            <field name="model">agenda.curso</field>
+            <field name="arch" type="xml">
+                <form string="Curso">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Nombre del Curso"/>
+                            <field name="capacidad" placeholder="Capacidad Máxima de Estudiantes"/>
+                            <!-- <field name="paralelo" string="Paralelo"/> -->
+                        </group>
+                        <notebook>
+                            <page string="Materias del Curso">
+                                <field name="curso_materia_ids" mode="tree,form">
+                                    <tree string="Materias del Curso" editable="bottom">
+                                        <field name="materia_id" string="Materia"/>
+                                        <field name="grado" string="Nivel Educativo"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Alumnos Inscritos">
+                                <field name="alumno_ids" mode="tree,form">
+                                    <tree string="Alumnos Inscritos">
+                                        <field name="contacto_id" string="Nombre del Alumno"/>
+                                        <field name="grado" string="Nivel Educativo"/>
+                                        <field name="fecha_nacimiento" string="Fecha de Nacimiento"/>
+                                        <field name="edad" string="Edad"/>
+                                    </tree>
+                                    <form string="Detalles del Alumno">
+                                        <group>
+                                            <field name="contacto_id" string="Nombre del Alumno"/>
+                                            <field name="grado" string="Nivel Educativo"/>
+                                            <field name="fecha_nacimiento" string="Fecha de Nacimiento"/>
+                                            <field name="edad" string="Edad"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_curso_tree" model="ir.ui.view">
+            <field name="name">curso.tree</field>
+            <field name="model">agenda.curso</field>
+            <field name="arch" type="xml">
+                <tree string="Cursos">
+                    <field name="name"/>
+                    <!-- <field name="paralelo" string="Paralelo"/> -->
+                    <field name="capacidad" string="Capacidad Máxima"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_curso" model="ir.actions.act_window">
+            <field name="name">Cursos</field>
+            <field name="res_model">agenda.curso</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_curso" name="Cursos" parent="menu_agenda_escolar_root" action="action_curso" sequence="3"/>
+
+        <record id="view_curso_materia_form" model="ir.ui.view">
+            <field name="name">curso.materia.form</field>
+            <field name="model">agenda.curso_materia</field>
+            <field name="arch" type="xml">
+                <form string="Curso - Materia">
+                    <sheet>
+                        <group>
+                            <field name="curso_id" string="Curso" required="1"/>
+                            <field name="materia_id" string="Materia" required="1"/>
+                        </group>
+                        <group>
+                            <field name="grado" string="Grado Educativo" required="1"/>
+                            <field name="profesor_id" string="Profesor Asignado" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Curso - Materia -->
+        <record id="view_curso_materia_tree" model="ir.ui.view">
+            <field name="name">curso.materia.tree</field>
+            <field name="model">agenda.curso_materia</field>
+            <field name="arch" type="xml">
+                <tree string="Cursos y Materias">
+                    <field name="curso_id" string="Curso"/>
+                    <field name="materia_id" string="Materia"/>
+                    <field name="grado" string="Nivel Educativo"/>
+                    <field name="profesor_id" string="Profesor"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la vista Curso - Materia -->
+        <record id="action_curso_materia" model="ir.actions.act_window">
+            <field name="name">Curso - Materia</field>
+            <field name="res_model">agenda.curso_materia</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_curso_materia" name="Curso - Materia" parent="menu_agenda_escolar_root" action="action_curso_materia" sequence="4"/>
+    </data>
+</odoo>

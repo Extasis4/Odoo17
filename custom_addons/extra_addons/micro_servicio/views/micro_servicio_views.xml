@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_micro_servicio_tree" model="ir.ui.view">
+            <field name="name">view.micro.servicio.tree</field>
+            <field name="model">micro_servicio.micro_servicio</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="inf"/>
+                    
+                </tree>
+            </field>
+        </record>
+    <!-- Vista de formulario para la conexión con el microservicio -->
+        <record id="view_micro_servicio_form" model="ir.ui.view">
+            <field name="name">micro.servicio.form</field>
+            <field name="model">micro_servicio.micro_servicio</field>
+            <field name="arch" type="xml">
+                <form string="Conexión Microservicio">
+                    <header>
+                        <!-- Botón para conectar al microservicio -->
+                        <button name="action_access_microservice" type="object" string="Conectar Microservicio" class="btn-primary"/>
+                        <button name="despedida" type="object" string="Despedida" class="btn-primary"/>
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" string="Nombre"/>
+                            </group>
+                            <group>
+                                <field name="inf" string="Información"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la vista de conexión al microservicio -->
+        <record id="action_micro_servicio" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Microservicio</field>
+            <field name="res_model">micro_servicio.micro_servicio</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="view_id" ref="view_micro_servicio_form"/> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer microservicio
+                </p>
+            </field>
+        </record>
+
+    <!-- Menú principal para "Microservicio" -->
+        <menuitem id="menu_micro_servicio_root" name="Microservicio" sequence="0"/>
+        <menuitem id="menu_micro_servicio" name="Microservicio" parent="menu_micro_servicio_root" action="action_micro_servicio" sequence="0"/>
+
+
+    </data>
+</odoo>

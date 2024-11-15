@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Vista de formulario para Profesor -->
+        <record id="view_profesor_form" model="ir.ui.view">
+            <field name="name">profesor.form</field>
+            <field name="model">agenda.profesor</field>
+            <field name="arch" type="xml">
+                <form string="Profesor">
+                    <sheet>
+                        <group>
+                            <group string="Información Personal" col="2">
+                                <field name="name" placeholder="Nombre del Profesor"/>
+                                <field name="vat" string="Carnet de Identidad"/>
+                                <field name="codigo_profesor" placeholder="Código de Profesor"/>
+                                <field name="email" placeholder="Correo Electrónico"/>
+                                <field name="phone" string="Teléfono"/>
+                            </group>
+                            <group string="Detalles Profesionales" col="2">
+                                <field name="asignatura" placeholder="Asignatura"/>
+                                <field name="fecha_ingreso" placeholder="Fecha de Ingreso"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Cursos Asignados">
+                                <field name="cursos_asignados_ids" mode="tree,form">
+                                    <tree string="Cursos Asignados" editable="bottom">
+                                        <field name="curso_id" string="Curso"/>
+                                        <field name="materia_id" string="Materia"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Profesor -->
+        <record id="view_profesor_tree" model="ir.ui.view">
+            <field name="name">profesor.tree</field>
+            <field name="model">agenda.profesor</field>
+            <field name="arch" type="xml">
+                <tree string="Profesores">
+                    <field name="name" string="Nombre"/>
+                    <field name="codigo_profesor" string="Código"/>
+                    <field name="asignatura" string="Asignatura"/>
+                    <field name="email" string="Correo Electrónico"/>
+                    <field name="phone" string="Teléfono"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la lista de Profesores -->
+        <record id="action_profesor" model="ir.actions.act_window">
+            <field name="name">Profesores</field>
+            <field name="res_model">agenda.profesor</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menú para acceder a Profesores -->
+        <menuitem id="menu_profesor" name="Profesores" action="action_profesor" sequence="7"/>
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Vista de formulario para Alumno -->
+        <record id="view_alumno_form" model="ir.ui.view">
+            <field name="name">alumno.form</field>
+            <field name="model">agenda.alumno</field>
+            <field name="arch" type="xml">
+                <form string="Alumno">
+                    <sheet>
+                        <group>
+                            <group string="Información Personal" col="2">
+                                <field name="name" placeholder="Nombre del Alumno"/>
+                                <field name="vat" string="Carnet de Identidad"/>
+                                <field name="email" placeholder="Correo Electrónico"/>
+                            </group>
+                            <group string="Detalles Académicos" col="2">
+                                <field name="curso_id" string="Curso"/>
+                                <field name="grado"/>
+                                <field name="fecha_nacimiento"/>
+                                <field name="edad" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Padres">
+                                <field name="padre_id">
+                                    <tree>
+                                        <field name="name" string="Nombre del padre"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Alumno -->
+        <record id="view_alumno_tree" model="ir.ui.view">
+            <field name="name">alumno.tree</field>
+            <field name="model">agenda.alumno</field>
+            <field name="arch" type="xml">
+                <tree string="Alumnos">
+                    <field name="name" string="Nombre"/>
+                    <field name="vat" string="Carnet de Identidad"/>
+                    <field name="email" string="Correo Electrónico"/>
+                    <field name="curso_id" string="Curso"/>
+                    <field name="grado" string="Nivel Educativo"/>
+                    <field name="fecha_nacimiento" string="Fecha de Nacimiento"/>
+                    <field name="edad" string="Edad"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la lista de Alumnos -->
+        <record id="action_alumno" model="ir.actions.act_window">
+            <field name="name">Alumnos</field>
+            <field name="res_model">agenda.alumno</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menú para acceder a Alumnos -->
+        <menuitem id="menu_alumno" name="Alumnos" action="action_alumno" sequence="6"/>
+    </data>
+</odoo>

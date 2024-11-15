@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Tree View para Comunicado Enviado -->
+        <record id="view_comunicado_enviado_tree" model="ir.ui.view">
+            <field name="name">Comunicado Enviado Tree</field>
+            <field name="model">agenda.comunicado.enviado</field>
+            <field name="arch" type="xml">
+                <tree string="Comunicados Enviados">
+                    <field name="comunicado_id"/>
+                    <field name="destinatario_id"/>
+                    <field name="fecha_envio"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View para Comunicado Enviado -->
+        <record id="view_comunicado_enviado_form" model="ir.ui.view">
+            <field name="name">Comunicado Enviado Form</field>
+            <field name="model">agenda.comunicado.enviado</field>
+            <field name="arch" type="xml">
+                <form string="Comunicado Enviado">
+                    <sheet>
+                        <group>
+                            <field name="comunicado_id" readonly="1"/>
+                            <field name="destinatario_id" readonly="1"/>
+                            <field name="fecha_envio" readonly="1"/>
+                        </group>
+                        <!-- Pestañas para los diferentes estados del comunicado -->
+                        <notebook>
+                            <!-- Pestaña de Comunicado Enviado -->
+                            <page string="Comunicado Enviado">
+                                <field name="comunicado_enviado_ids" widget="one2many">
+                                    <tree string="Usuarios Enviados">
+                                        <field name="destinatario_id"/>
+                                        <field name="fecha_envio"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción y Submenú para Comunicado Enviado -->
+        <record id="action_comunicado_enviado" model="ir.actions.act_window">
+            <field name="name">Comunicados Enviados</field>
+            <field name="res_model">agenda.comunicado.enviado</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_comunicado_enviado" name="Comunicados Enviados" parent="menu_comunicado" action="action_comunicado_enviado"/>
+    </data>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Vista de formulario para Administrativo -->
+        <record id="view_administrativo_form" model="ir.ui.view">
+            <field name="name">administrativo.form</field>
+            <field name="model">agenda.administrativo</field>
+            <field name="arch" type="xml">
+                <form string="Administrativo">
+                    <sheet>
+                        <group>
+                            <field name="contacto_id" invisible="1"/>
+                            <field name="name" placeholder="Nombre del Administrativo"/>
+                            <field name="rol" placeholder="Rol del Administrativo"/>
+                            <field name="fecha_ingreso"/>
+                        </group>
+                        <group string="Información de Contacto">
+                            <field name="vat" string="Documento de Identificación"/>
+                            <field name="phone" string="Teléfono"/>
+                            <field name="email" string="Correo Electrónico"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Administrativo -->
+        <record id="view_administrativo_tree" model="ir.ui.view">
+            <field name="name">administrativo.tree</field>
+            <field name="model">agenda.administrativo</field>
+            <field name="arch" type="xml">
+                <tree string="Administrativos">
+                    <field name="name" string="Nombre"/>
+                    <field name="rol" string="Rol"/>
+                    <field name="phone" string="Teléfono"/>
+                    <field name="email" string="Correo Electrónico"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la lista de Administrativos -->
+        <record id="action_administrativo" model="ir.actions.act_window">
+            <field name="name">Administrativos</field>
+            <field name="res_model">agenda.administrativo</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menú para acceder a Administrativos -->
+        <menuitem id="menu_administrativo" name="Administrativos" parent="menu_agenda_escolar_root" action="action_administrativo" sequence="8"/>
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_comunicado_form" model="ir.ui.view">
+            <field name="name">Comunicado Form</field>
+            <field name="model">agenda.comunicado</field>
+            <field name="arch" type="xml">
+                <form string="Comunicado">
+                    <header>
+                        <button name="enviar_comunicado" type="object" string="Enviar Comunicado" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="titulo"/>
+                            <field name="contenido"/>
+                            <field name="tipo_contenido"/>
+                            <field name="tipo_comunicado"/>
+                            <field name="curso_id"/>
+                            <field name="fecha" readonly="1"/>
+                            <field name="destinatarios_ids" widget="many2many">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <notebook>
+                            <!-- Pestaña de Comunicado Enviado -->
+                            <page string="Comunicado Enviado">
+                                <field name="comunicado_enviado_ids" widget="one2many">
+                                    <tree string="Usuarios Enviados">
+                                        <field name="destinatario_id"/>
+                                        <field name="fecha_envio"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <!-- Pestaña de Comunicado Recepcionado -->
+                            <page string="Comunicado Recepcionado">
+                                <field name="comunicado_recepcionado_ids" widget="one2many">
+                                    <tree string="Usuarios Recepcionados">
+                                        <field name="destinatario_id"/>
+                                        <field name="fecha_recepcion"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            
+                            <!-- Pestaña de Comunicado Leído -->
+                            <page string="Comunicado Leído">
+                                <field name="comunicado_leido_ids" widget="one2many">
+                                    <tree string="Usuarios Leídos">
+                                        <field name="destinatario_id"/>
+                                        <field name="fecha_lectura"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <!-- Contenido Multimedia (sin condiciones de visibilidad) -->
+                        <group string="Contenido Multimedia (Seleccione solo uno según el tipo de contenido)">
+                            <field name="imagen" placeholder="Subir imagen aquí si es tipo Imagen"/>
+                            <field name="video" filename="video_filename" placeholder="Subir video aquí si es tipo Video"/>
+                            <field name="enlace_url" placeholder="Ingresar URL aquí si es tipo Enlace"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_comunicado_tree" model="ir.ui.view">
+            <field name="name">Comunicado Tree</field>
+            <field name="model">agenda.comunicado</field>
+            <field name="arch" type="xml">
+                <tree string="Comunicados">
+                    <field name="titulo"/>
+                    <field name="contenido"/>
+                    <field name="tipo_contenido"/>
+                    <field name="tipo_comunicado"/>
+                    <field name="fecha"/>
+                    <field name="destinatarios_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_comunicado" model="ir.actions.act_window">
+            <field name="name">Comunicados</field>
+            <field name="res_model">agenda.comunicado</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_comunicado" name="Comunicados" action="action_comunicado"/>
+    </data>
+</odoo>
