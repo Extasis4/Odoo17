@@ -7,7 +7,7 @@
     'description': """Este modulo es para gestionar a los usuarios, gestionar las materias, 
     gestionar los cursos""",
 
-    'author': "Alejandra Villarreal",
+    'author': "Alejandra Villarreal and Ricardo",
     'category': 'Uncategorized',
     'version': '0.1',
     'depends': ['base'],
